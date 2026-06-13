@@ -33,9 +33,9 @@ canvas{display:block;border:2px solid #f7931a;box-shadow:0 0 30px rgba(247,147,2
 #footer{position:fixed;bottom:8px;left:0;right:0;text-align:center;font-size:9px;color:#f7931a;opacity:.6}
 /* Mobile controls */
 #mobile-controls{display:none;position:fixed;bottom:15px;left:0;right:0;z-index:150;touch-action:none}
-#mobile-controls .ctrl-row{display:flex;justify-content:center;gap:6px;margin-bottom:5px}
+#mobile-controls .ctrl-row{display:flex;justify-content:center;gap:10px}
 #mobile-controls .ctrl-btn{
-  width:48px;height:48px;border-radius:10px;
+  width:50px;height:50px;border-radius:10px;
   background:rgba(247,147,26,.15);border:2px solid rgba(247,147,26,.6);
   color:#f7931a;font-size:20px;display:flex;align-items:center;justify-content:center;
   user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;
@@ -43,13 +43,12 @@ canvas{display:block;border:2px solid #f7931a;box-shadow:0 0 30px rgba(247,147,2
   transition:background .1s
 }
 #mobile-controls .ctrl-btn:active,#mobile-controls .ctrl-btn.pressed{background:rgba(247,147,26,.4)}
-#mobile-controls .ctrl-btn.drop-btn{width:110px;font-size:12px;letter-spacing:1px;height:40px}
 @media(pointer:coarse),(max-width:768px){
   #mobile-controls{display:block}
-  #game{flex-direction:column;align-items:center;gap:8px;padding-bottom:180px}
+  #game{flex-direction:column;align-items:center;gap:0;padding:0}
   #left,#right{display:none}
-  canvas#cv{width:min(92vw,380px);height:auto}
-  body{height:auto;min-height:100vh;overflow-y:auto;padding:5px 0}
+  canvas#cv{width:92vw;max-width:380px;height:calc(100vh - 90px);height:calc(100dvh - 90px);object-fit:contain}
+  body{height:100vh;height:100dvh;overflow:hidden;padding:0;margin:0;display:flex;justify-content:center;align-items:flex-start;padding-top:5px}
   #footer{display:none}
 }
 @keyframes bl{0%,100%{opacity:1}50%{opacity:.2}}
@@ -92,15 +91,10 @@ canvas{display:block;border:2px solid #f7931a;box-shadow:0 0 30px rgba(247,147,2
 <div id="msg"></div>
 <div id="mobile-controls">
 <div class="ctrl-row">
-<div class="ctrl-btn" id="btn-rotate">&#8593;</div>
-</div>
-<div class="ctrl-row">
 <div class="ctrl-btn" id="btn-left">&#8592;</div>
 <div class="ctrl-btn" id="btn-down">&#8595;</div>
+<div class="ctrl-btn" id="btn-rotate">&#8593;</div>
 <div class="ctrl-btn" id="btn-right">&#8594;</div>
-</div>
-<div class="ctrl-row">
-<div class="ctrl-btn drop-btn" id="btn-drop">DROP</div>
 </div>
 </div>
 <div id="footer">Criado por Bitcoiniciantes junho/2026 | valor BTC USD 63.500</div>
@@ -569,8 +563,7 @@ var btns=[
   {id:'btn-left',action:'left',repeat:true},
   {id:'btn-right',action:'right',repeat:true},
   {id:'btn-down',action:'down',repeat:true},
-  {id:'btn-rotate',action:'rotate',repeat:false},
-  {id:'btn-drop',action:'drop',repeat:false}
+  {id:'btn-rotate',action:'rotate',repeat:false}
 ];
 btns.forEach(function(b){
   var el=document.getElementById(b.id);
